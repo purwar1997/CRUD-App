@@ -1,7 +1,7 @@
 const User = require("../models/user");
 
 exports.home = (req, res) => {
-  res.status(200).send('<h1 style="text-align: center">CRUD App</h1>');
+  res.status(201).send('<h1 style="text-align: center">CRUD App</h1>');
 };
 
 exports.getUsers = async (req, res) => {

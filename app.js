@@ -1,8 +1,13 @@
 require("dotenv").config({ path: ".env" });
 require("./config/database").connect();
-const router = require("./routes/router");
+const router = require("./routes/routes");
 const express = require("express");
 const app = express();
+
+// use() method is used to mount middleware on top of a path
+// if the path is not mentioned, default path is set to '/' (root path)
+
+// following middlewares will be invoked for every request to the app
 
 // used to parse JSON data that comes via POST and PUT request
 app.use(express.json());
@@ -11,11 +16,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // router object acts like a middleware
-app.get("/", router);
-app.get("/getUsers", router);
-app.post("/createUser", router);
-app.get("/getUser/:userId", router);
-app.put("/updateUser/:userId", router);
-app.delete("/deleteUser/:userId", router);
+app.use("/", router);
 
 module.exports = app;
