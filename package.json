@@ -1,7 +1,7 @@
 {
   "name": "crud-app",
   "version": "1.0.0",
-  "description": "A simple CRUD application",
+  "description": "A simple CRUD application to handle username and email",
   "main": "app.js",
   "scripts": {
     "start": "node server.js",
