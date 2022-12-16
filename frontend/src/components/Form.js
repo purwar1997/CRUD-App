@@ -1,9 +1,43 @@
+import { useState } from 'react';
+import Axios from 'axios';
+
 const Form = function () {
+  const [userName, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+
+  const sendData = () => {
+    const data = {
+      username: userName,
+      email: email,
+    };
+
+    Axios.post('/createUser', data)
+      .then(res => console.log(res.data))
+      .catch(err => console.log(err.message));
+  };
+
+  const handleSubmit = event => {
+    // used to prevent default action when an event occurs
+    // default action for submit event: data filled inside input elements will be sent to the url mentioned
+    // in action attribute
+    event.preventDefault();
+    sendData();
+
+    // resetting the value of input fields
+    setUsername('');
+    setEmail('');
+  };
+
   return (
-    <div className="mt-8">
+    <div className="mt-6">
       <h1 className="text-4xl font-semibold text-center">Create User</h1>
 
-      <form className="mt-16 flex flex-col items-center gap-10" action="" method="post">
+      <form
+        className="my-12 flex flex-col items-center gap-10"
+        action=""
+        method="get"
+        onSubmit={handleSubmit}
+      >
         <div className="flex justify-center gap-8">
           <div className="flex flex-col items-start gap-2">
             <label className="text-lg" htmlFor="username">
@@ -15,7 +49,8 @@ const Form = function () {
               type="text"
               name="username"
               id="username"
-              required
+              value={userName}
+              onChange={event => setUsername(event.target.value)}
             />
           </div>
 
@@ -29,7 +64,8 @@ const Form = function () {
               type="email"
               name="email"
               id="email"
-              required
+              value={email}
+              onChange={event => setEmail(event.target.value)}
             />
           </div>
         </div>
